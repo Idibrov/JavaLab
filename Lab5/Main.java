@@ -1,3 +1,4 @@
+// Main.java
 public class Main {
     public static void main(String[] args) {
         String text = "Заварилась какая-то бяКа на отдалённых рубежах о которой нет достоверной информации";

@@ -1,3 +1,4 @@
+// Part.java
 public class Part {
     // 1
     public static String findLongestWord(String text) {
@@ -27,7 +28,7 @@ public class Part {
 
     // 3
     public static String censorWord(String text) {
-        return text.toLowerCase().replaceAll("бяка", "[вырезано цензурой]");
+        return text.replaceAll("(?i)бяка", "[вырезано цензурой]");
     }
 
     // 4
@@ -44,18 +45,18 @@ public class Part {
     // 5
     public static String invertWords(String inputString) {
         String[] words = inputString.split("\\s+");
-        String inverted = "";
+        StringBuilder inverted = new StringBuilder();
         for (int i = words.length - 1; i >= 0; i--) {
-            inverted += reverseWord(words[i]) + " ";
+            inverted.append(reverseWord(words[i])).append(" ");
         }
-        return inverted.trim();
+        return inverted.toString().trim();
     }
 
     private static String reverseWord(String word) {
-        String reversed = "";
+        StringBuilder reversed = new StringBuilder();
         for (int i = word.length() - 1; i >= 0; i--) {
-            reversed += word.charAt(i);
+            reversed.append(word.charAt(i));
         }
-        return reversed;
+        return reversed.toString();
     }
 }
