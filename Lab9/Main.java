@@ -19,7 +19,7 @@ public class Main {
 
         ListPerformance.fillLists(arrayList, linkedList, size);
 
-        int numOfSelections = 10000;
+        int numOfSelections = 1000;
         ListPerformance.selectRandomElements(arrayList, linkedList, numOfSelections);
 
         // тест для 3
