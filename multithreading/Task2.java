@@ -8,20 +8,27 @@ public class Task2 extends Thread {
     @Override
     public void run() {
         for (int i = 0; i < 100; i++) {
-            Thread thread = new Thread(() -> {
+            new Thread(() -> {
                 for (int j = 0; j < 1000; j++) {
-                    counter.increment();
-                    System.out.println("Поток " + Thread.currentThread().getId() + ": count = " + counter.getCount());
+                    synchronized (counter) {
+                        counter.increment();
+                        System.out.println("Поток " + Thread.currentThread().getId() + ": count = " + counter.getCount());
+                    }
                 }
-            });
-            System.out.println("Запуск потока " + thread.getId());
-            thread.start();
+                synchronized (counter) {
+                    counter.notify();
+                }
+            }).start();
         }
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        synchronized (counter) {
+            while (counter.getCount() < 100 * 1000) {
+                try {
+                    counter.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         System.out.println("Значение count: " + counter.getCount());
